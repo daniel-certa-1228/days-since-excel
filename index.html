@@ -91,7 +91,9 @@
         const LAST_INCIDENT_DATE = '2026-01-30';
 
         function calculateDays() {
-            const lastIncident = new Date(LAST_INCIDENT_DATE);
+            // Parse the date string directly to avoid timezone issues
+            const [year, month, day] = LAST_INCIDENT_DATE.split('-').map(Number);
+            const lastIncident = new Date(year, month - 1, day);
             const today = new Date();
             
             // Reset time to midnight for accurate day counting
