@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Days Since Dan Forgot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .days-counter {
+            font-size: 8rem;
+            font-weight: bold;
+            color: #667eea;
+            margin: 30px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .days-label {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .last-incident {
+            font-size: 1rem;
+            color: #999;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .days-counter {
+                font-size: 5rem;
+            }
+
+            .days-label {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>It has been</h1>
+        <div class="days-counter" id="dayCounter">0</div>
+        <div class="days-label">days</div>
+        <h1>since Dan forgot to update the Excel Export</h1>
+        <div class="last-incident">Last incident: <span id="lastDate"></span></div>
+    </div>
+
+    <script>
+        // 🔧 UPDATE THIS DATE when Dan forgets again (format: YYYY-MM-DD)
+        const LAST_INCIDENT_DATE = '2025-01-15';
+
+        function calculateDays() {
+            const lastIncident = new Date(LAST_INCIDENT_DATE);
+            const today = new Date();
+            
+            // Reset time to midnight for accurate day counting
+            lastIncident.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0);
+            
+            const diffTime = today - lastIncident;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            return diffDays;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        function updateCounter() {
+            const days = calculateDays();
+            document.getElementById('dayCounter').textContent = days;
+            document.getElementById('lastDate').textContent = formatDate(LAST_INCIDENT_DATE);
+        }
+
+        // Update immediately and then every hour
+        updateCounter();
+        setInterval(updateCounter, 3600000);
+    </script>
+</body>
+</html>
