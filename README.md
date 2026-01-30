@@ -75,7 +75,7 @@ MIT License - Because unlike Excel Exports, this should be free and accessible t
 
 ---
 
-**Current Status:** It has been `X` days since Dan forgot to update the Excel Export.
+**Current Status:** It has been `0` days since Dan forgot to update the Excel Export.
 
 *Let's see how long this streak lasts.*
 
